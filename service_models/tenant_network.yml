@@ -1,0 +1,7 @@
+tenant: finance
+
+network:
+  name: prod-net
+  vlan_id: 300
+  bridge: br-int
+  port_name: finance-net

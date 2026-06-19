@@ -1,0 +1,14 @@
+---
+- name: Create OVS VLAN Port
+  shell: >
+    ovs-vsctl --may-exist add-port {{ bridge }}
+    {{ port_name }}
+    tag={{ vlan_id }}
+    -- set interface {{ port_name }} type=internal
+
+- name: Show OVS Configuration
+  command: ovs-vsctl show
+  register: ovs_show
+
+- debug:
+    var: ovs_show.stdout_lines
