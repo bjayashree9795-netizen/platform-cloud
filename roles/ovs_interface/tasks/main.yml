@@ -1,0 +1,25 @@
+---
+- name: Check Interface IP
+  shell: ip -4 addr show {{ port_name }}
+  register: ip_check
+  failed_when: false
+  changed_when: false
+
+- name: Assign IP Address
+  command: >
+    ip addr add {{ gateway_ip }}/{{ prefix }}
+    dev {{ port_name }}
+  when: gateway_ip not in ip_check.stdout
+
+- name: Bring Interface UP
+  command: >
+    ip link set {{ port_name }} up
+
+- name: Show Interface
+  command: >
+    ip addr show {{ port_name }}
+  register: interface_status
+  changed_when: false
+
+- debug:
+    var: interface_status.stdout_lines

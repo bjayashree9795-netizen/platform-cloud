@@ -1,14 +1,22 @@
 ---
+- name: Check if OVS Port Exists
+  shell: ovs-vsctl list port {{ port_name }}
+  register: port_check
+  failed_when: false
+  changed_when: false
+
 - name: Create OVS VLAN Port
   shell: >
-    ovs-vsctl --may-exist add-port {{ bridge }}
+    ovs-vsctl add-port {{ bridge }}
     {{ port_name }}
     tag={{ vlan_id }}
     -- set interface {{ port_name }} type=internal
+  when: port_check.rc != 0
 
 - name: Show OVS Configuration
   command: ovs-vsctl show
   register: ovs_show
+  changed_when: false
 
 - debug:
     var: ovs_show.stdout_lines

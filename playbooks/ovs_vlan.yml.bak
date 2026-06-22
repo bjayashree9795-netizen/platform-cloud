@@ -1,0 +1,15 @@
+---
+- name: Create Tenant Network
+  hosts: ovs
+  gather_facts: no
+
+  vars_files:
+    - ../service_models/tenant_network.yml
+
+  vars:
+    bridge: "{{ network.bridge }}"
+    vlan_id: "{{ network.vlan_id }}"
+    port_name: "{{ network.port_name }}"
+
+  roles:
+    - ovs_vlan

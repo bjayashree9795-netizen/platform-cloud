@@ -1,0 +1,4 @@
+---
+bridge: br-int
+vlan_id: 100
+port_name: tenant100
