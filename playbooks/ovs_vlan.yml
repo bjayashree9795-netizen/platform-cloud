@@ -3,6 +3,16 @@
   hosts: ovs
   gather_facts: no
 
+  vars_files:
+    - ../service_models/tenant_network.yml
+
+  vars:
+    bridge: "{{ bridge | default(network.bridge) }}"
+    vlan_id: "{{ vlan_id | default(network.vlan_id) }}"
+    port_name: "{{ port_name | default(network.port_name) }}"
+    gateway_ip: "{{ gateway_ip | default('192.168.70.1') }}"
+    prefix: "{{ prefix | default(24) }}"
+
   roles:
     - ovs_vlan
     - ovs_interface
