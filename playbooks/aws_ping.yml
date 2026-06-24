@@ -1,0 +1,8 @@
+---
+- hosts: aws
+  gather_facts: no
+
+  tasks:
+
+    - name: Ping
+      ping:
