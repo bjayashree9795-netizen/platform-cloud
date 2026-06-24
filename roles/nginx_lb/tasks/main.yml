@@ -1,0 +1,34 @@
+---
+- name: Install NGINX
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+- name: Create SSL Directory
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+
+- name: Copy Certificate
+  copy:
+    src: nginx.crt
+    dest: /etc/nginx/ssl/nginx.crt
+
+- name: Copy Private Key
+  copy:
+    src: nginx.key
+    dest: /etc/nginx/ssl/nginx.key
+    mode: '0600'
+
+
+- name: Deploy Load Balancer Configuration
+  template:
+    src: lb.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Restart NGINX
+
+- name: Ensure NGINX Running
+  service:
+    name: nginx
+    state: started
+    enabled: yes

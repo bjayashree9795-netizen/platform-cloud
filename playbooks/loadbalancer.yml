@@ -1,0 +1,11 @@
+---
+- name: Configure Load Balancer
+  hosts: loadbalancer
+  become: yes
+  gather_facts: no
+
+  vars_files:
+    - ../service_models/loadbalancer.yml
+
+  roles:
+    - nginx_lb

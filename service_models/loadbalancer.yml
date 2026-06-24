@@ -1,0 +1,12 @@
+service_name: employee-portal
+
+vip:
+  port: 80
+
+tls:
+  enabled: true
+
+pool:
+  members:
+    - 172.31.27.123
+    - 172.31.31.231
