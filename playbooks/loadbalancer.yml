@@ -1,6 +1,6 @@
 ---
 - name: Configure Load Balancer
-  hosts: loadbalancer
+  hosts: aws-lb
   become: yes
   gather_facts: no
 
