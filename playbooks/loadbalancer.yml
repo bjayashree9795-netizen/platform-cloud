@@ -7,5 +7,17 @@
   vars_files:
     - ../service_models/loadbalancer.yml
 
+  vars:
+
+    service_name: "{{ service_name | default(service_name) }}"
+
+    vip:
+      port: "{{ vip_port | default(vip.port) }}"
+
+    pool:
+      members:
+        - "{{ backend1 | default(pool.members[0]) }}"
+        - "{{ backend2 | default(pool.members[1]) }}"
+
   roles:
     - nginx_lb
