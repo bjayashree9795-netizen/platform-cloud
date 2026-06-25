@@ -1,0 +1,14 @@
+---
+- name: Create VDOM
+  fortinet.fortios.fortios_system_vdom:
+    vdom: root
+    state: present
+
+    system_vdom:
+      name: "{{ vdom_name }}"
+
+- name: Show Requested Tenant
+  debug:
+    msg:
+      - "Tenant Name : {{ tenant_name }}"
+      - "VDOM Name   : {{ vdom_name }}"

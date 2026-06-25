@@ -1,0 +1,16 @@
+---
+- name: Create FortiGate VDOM
+  hosts: fortigate
+  gather_facts: no
+  collections:
+    - fortinet.fortios
+
+  vars_files:
+    - ../service_models/fortigate_vdom.yml
+
+  vars:
+    tenant_name: "{{ tenant_name | default(tenant.name) }}"
+    vdom_name: "{{ vdom_name | default(vdom.name) }}"
+
+  roles:
+    - fortigate_vdom

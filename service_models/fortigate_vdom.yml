@@ -1,0 +1,4 @@
+tenant_name: DEFAULT
+
+vdom:
+  name: DEFAULT-VDOM
