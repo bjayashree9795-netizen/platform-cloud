@@ -1,0 +1,12 @@
+---
+- name: Test FortiGate Connectivity
+  hosts: fortigate
+  gather_facts: no
+
+  tasks:
+    - name: Get FortiGate Status
+      raw: get system status
+      register: fortigate_status
+
+    - debug:
+        var: fortigate_status.stdout_lines
