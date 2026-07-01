@@ -1,0 +1,54 @@
+---
+tenant:
+
+  id: ""
+
+  name: ""
+
+  description: ""
+
+  region: ""
+
+  availability_zone: ""
+
+  environment: ""
+
+  department: ""
+
+  owner: ""
+
+services:
+
+  internet: false
+
+  firewall: true
+
+  load_balancer: false
+
+  monitoring: true
+
+network:
+
+  vrf: ""
+
+  subnet: ""
+
+  cidr: ""
+
+security:
+
+  security_zone: ""
+
+  firewall_policy: ""
+
+metadata:
+
+  request_id: ""
+
+  requested_by: ""
+
+  request_time: ""
+
+status:
+
+  state: REQUESTED
