@@ -1,0 +1,12 @@
+---
+- name: Tenant Post Validation
+
+  hosts: localhost
+
+  gather_facts: false
+
+  tasks:
+
+    - debug:
+
+        msg: "Post Validation Successful"

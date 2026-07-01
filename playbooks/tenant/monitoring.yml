@@ -1,0 +1,12 @@
+---
+- name: Monitoring Registration
+
+  hosts: localhost
+
+  gather_facts: false
+
+  tasks:
+
+    - debug:
+
+        msg: "Monitoring Registered"

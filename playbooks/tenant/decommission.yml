@@ -1,0 +1,12 @@
+---
+- name: Tenant Decommission
+
+  hosts: localhost
+
+  gather_facts: false
+
+  tasks:
+
+    - debug:
+
+        msg: "Tenant Deleted"
