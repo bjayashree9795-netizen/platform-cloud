@@ -1,0 +1,14 @@
+---
+- name: Validate Tenant Request
+
+  hosts: localhost
+
+  gather_facts: false
+
+  tasks:
+
+    - name: Validation Stage
+
+      debug:
+
+        msg: "Tenant Request Validation Successful"

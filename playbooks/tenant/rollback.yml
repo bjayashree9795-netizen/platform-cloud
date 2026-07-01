@@ -1,0 +1,14 @@
+---
+- name: Tenant Rollback
+
+  hosts: localhost
+
+  gather_facts: false
+
+  tasks:
+
+    - name: Rollback Stage
+
+      debug:
+
+        msg: "Rollback Initiated"

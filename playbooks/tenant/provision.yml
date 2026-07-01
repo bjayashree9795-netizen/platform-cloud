@@ -1,0 +1,14 @@
+---
+- name: Tenant Provisioning
+
+  hosts: localhost
+
+  gather_facts: false
+
+  tasks:
+
+    - name: Provision Stage
+
+      debug:
+
+        msg: "Provisioning Tenant..."
