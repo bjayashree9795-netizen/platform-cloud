@@ -1,38 +1,37 @@
----
-- name: Validate Tenant Service Request
-
-  hosts: localhost
-  gather_facts: false
-
-  vars:
-
-    tenant_request:
-
-      tenant_name: "{{ tenant_name }}"
-      tenant_description: "{{ tenant_description }}"
-      business_unit: "{{ business_unit }}"
-      project_name: "{{ project_name }}"
-      environment: "{{ environment }}"
-      region: "{{ region }}"
-      internet_access: "{{ internet_access }}"
-      firewall_required: "{{ firewall_required }}"
-      lb_required: "{{ lb_required }}"
-      monitoring_required: "{{ monitoring_required }}"
-      requested_by: "{{ requested_by }}"
-      owner_email: "{{ owner_email }}"
-
   tasks:
 
-    - name: Display Incoming Service Request
+    - name: Display Complete Service Request
       debug:
-        var: tenant_request
+        var: service_request
 
     - name: Validate Tenant Name
       assert:
         that:
-          - tenant_request.tenant_name | length > 2
+          - service_request.tenant.name | length > 2
         fail_msg: "Tenant Name cannot be empty"
 
-    - name: Validation Successful
+    - name: Validate Region
+      assert:
+        that:
+          - service_request.tenant.region in [
+              'CHN-SPD-MAA01',
+              'MUM-PNL-BOM01',
+              'MUM-MPE-BOM02'
+            ]
+        fail_msg: "Unsupported Region"
+
+    - name: Validate Environment
+      vars:
+        valid_envs:
+          - Development
+          - Testing
+          - UAT
+          - Production
+      assert:
+        that:
+          - service_request.tenant.environment in valid_envs
+        fail_msg: "Unsupported Environment"
+
+    - name: Service Request Validation Successful
       debug:
-        msg: "Tenant Service Request Validated Successfully"
+        msg: "Tenant Service Request has been validated successfully."
