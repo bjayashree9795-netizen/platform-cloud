@@ -7,7 +7,7 @@
 
     - name: Show Environment Value
       debug:
-        var: environment
+        var: tenant_environment
 
     - name: Show Region Value
       debug:
@@ -16,21 +16,14 @@
     - name: Verify Region
       assert:
         that:
-          - region in ['CHN-SPD-MAA01', 'MUM-PNL-BOM01', 'MUM-MPE-BOM02']
+          - region in allowed_regions
         fail_msg: "Unsupported Region"
 
-    - name: Verify Environment
-      vars:
-        valid_envs:
-          - development
-          - testing
-          - uat
-          - production
-
+    - name: Verify Tenant Environment
       assert:
         that:
-          - environment | lower in valid_envs
-        fail_msg: "Invalid Environment"
+          - tenant_environment in allowed_environments
+        fail_msg: "Unsupported Environment"
 
     - name: Infrastructure PreCheck Passed
       debug:
