@@ -6,16 +6,31 @@
 
   tasks:
 
+    - name: Show Region Value
+      debug:
+        var: region
+
     - name: Verify Region
       assert:
         that:
           - region in ['CHN-SPD-MAA01', 'MUM-PNL-BOM01', 'MUM-MPE-BOM02']
         fail_msg: "Unsupported Region"
 
+    - name: Show Environment Value
+      debug:
+        var: environment
+
     - name: Verify Environment
-      assert:
+      vars:
+        valid_envs:
+          - development
+          - testing
+          - uat
+          - production
+
+       assert:
         that:
-          - environment in ['Development', 'Testing', 'UAT', 'Production']
+          - environment | lower in valid_envs
         fail_msg: "Invalid Environment"
 
     - name: Infrastructure PreCheck Passed
