@@ -1,10 +1,13 @@
 ---
 - name: Tenant Infrastructure PreCheck
-
   hosts: localhost
   gather_facts: false
 
   tasks:
+
+    - name: Show Environment Value
+      debug:
+        var: environment
 
     - name: Show Region Value
       debug:
@@ -16,10 +19,6 @@
           - region in ['CHN-SPD-MAA01', 'MUM-PNL-BOM01', 'MUM-MPE-BOM02']
         fail_msg: "Unsupported Region"
 
-    - name: Show Environment Value
-      debug:
-        var: environment
-
     - name: Verify Environment
       vars:
         valid_envs:
@@ -28,7 +27,7 @@
           - uat
           - production
 
-       assert:
+      assert:
         that:
           - environment | lower in valid_envs
         fail_msg: "Invalid Environment"
