@@ -9,7 +9,7 @@
     - name: Verify Region
       assert:
         that:
-          - region in ['BLR-DC1', 'BLR-DC2', 'MUM-DC1', 'HYD-DC1']
+          - region in ['CHN-SPD-MAA01', 'MUM-PNL-BOM01', 'MUM-MPE-BOM02']
         fail_msg: "Unsupported Region"
 
     - name: Verify Environment
