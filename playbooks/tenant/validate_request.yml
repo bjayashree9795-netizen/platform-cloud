@@ -1,3 +1,51 @@
+---
+- name: Build and Validate Tenant Service Request
+
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+
+    service_request:
+
+      request:
+
+        id: "REQ-{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
+
+        service: "Tenant"
+
+        operation: "Create"
+
+        requested_by: "{{ requested_by }}"
+
+      tenant:
+
+        name: "{{ tenant_name }}"
+
+        description: "{{ tenant_description }}"
+
+        business_unit: "{{ business_unit }}"
+
+        project_name: "{{ project_name }}"
+
+        region: "{{ region }}"
+
+      services:
+
+        internet: "{{ internet_access == 'Yes' }}"
+
+        firewall: "{{ firewall_required == 'Yes' }}"
+
+        loadbalancer: "{{ lb_required == 'Yes' }}"
+
+        monitoring: "{{ monitoring_required == 'Yes' }}"
+
+      metadata:
+
+        owner_email: "{{ owner_email }}"
+
+        status: "REQUESTED"
+
   tasks:
 
     - name: Display Complete Service Request
@@ -13,13 +61,9 @@
     - name: Validate Region
       assert:
         that:
-          - service_request.tenant.region in [
-              'CHN-SPD-MAA01',
-              'MUM-PNL-BOM01',
-              'MUM-MPE-BOM02'
-            ]
+          - service_request.tenant.region in allowed_regions
         fail_msg: "Unsupported Region"
 
-    - name: Service Request Validation Successful
+    - name: Validation Successful
       debug:
-        msg: "Tenant Service Request has been validated successfully."
+        msg: "Tenant Service Request validated successfully."
