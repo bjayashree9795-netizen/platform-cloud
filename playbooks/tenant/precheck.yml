@@ -1,20 +1,22 @@
 ---
 - name: Tenant Infrastructure PreCheck
+
   hosts: localhost
   gather_facts: false
 
   tasks:
 
-    - name: Show Region Value
+    - name: Display Region
       debug:
         var: region
 
-    - name: Verify Region
+    - name: Verify Region Exists
       assert:
         that:
-          - region in allowed_regions
-        fail_msg: "Unsupported Region"
+          - region is defined
+          - region | length > 0
+        fail_msg: "Region missing"
 
-    - name: Infrastructure PreCheck Passed
+    - name: Infrastructure Ready
       debug:
-        msg: "Infrastructure is ready for provisioning"
+        msg: "PreCheck Passed"

@@ -1,52 +1,83 @@
 ---
-tenant:
+service:
 
-  id: ""
+  name: Tenant
 
-  name: ""
+  version: 1.0
 
-  description: ""
+  description: Tenant Lifecycle Service
 
-  region: ""
+request:
 
-  availability_zone: ""
+  mandatory:
 
-  department: ""
+    - tenant_name
+    - business_unit
+    - project_name
+    - region
+    - requested_by
+    - owner_email
 
-  owner: ""
+  optional:
+
+    - tenant_description
 
 services:
 
-  internet: false
+  internet:
 
-  firewall: true
+    type: boolean
 
-  load_balancer: false
+    default: false
 
-  monitoring: true
+  firewall:
 
-network:
+    type: boolean
 
-  vrf: ""
+    default: false
 
-  subnet: ""
+  loadbalancer:
 
-  cidr: ""
+    type: boolean
 
-security:
+    default: false
 
-  security_zone: ""
+  monitoring:
 
-  firewall_policy: ""
+    type: boolean
 
-metadata:
+    default: true
 
-  request_id: ""
+lifecycle:
 
-  requested_by: ""
+  validate:
 
-  request_time: ""
+    playbook: playbooks/tenant/validate_request.yml
 
-status:
+  precheck:
 
-  state: REQUESTED
+    playbook: playbooks/tenant/precheck.yml
+
+  provision:
+
+    playbook: playbooks/tenant/provision.yml
+
+  rollback:
+
+    playbook: playbooks/tenant/rollback.yml
+
+  postcheck:
+
+    playbook: playbooks/tenant/postcheck.yml
+
+  inventory:
+
+    playbook: playbooks/tenant/inventory.yml
+
+  monitoring:
+
+    playbook: playbooks/tenant/monitoring.yml
+
+  activate:
+
+    playbook: playbooks/tenant/activate.yml

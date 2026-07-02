@@ -1,12 +1,10 @@
 ---
-- name: Tenant Post Validation
+- name: Tenant PostCheck
 
   hosts: localhost
-
   gather_facts: false
 
   tasks:
 
     - debug:
-
-        msg: "Post Validation Successful"
+        msg: "PostCheck Successful"

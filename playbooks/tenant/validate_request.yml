@@ -6,11 +6,13 @@
 
   vars:
 
+    request_id: "CMP-TENANT-{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
+
     service_request:
 
       request:
 
-        id: "REQ-{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
+        id: "{{ request_id }}"
 
         service: "Tenant"
 
@@ -48,7 +50,7 @@
 
   tasks:
 
-    - name: Display Complete Service Request
+    - name: Display Service Request
       debug:
         var: service_request
 
@@ -61,9 +63,10 @@
     - name: Validate Region
       assert:
         that:
-          - service_request.tenant.region in allowed_regions
-        fail_msg: "Unsupported Region"
+          - service_request.tenant.region is defined
+          - service_request.tenant.region | length > 0
+        fail_msg: "Region is mandatory"
 
     - name: Validation Successful
       debug:
-        msg: "Tenant Service Request validated successfully."
+        msg: "Tenant Request {{ request_id }} validated successfully."

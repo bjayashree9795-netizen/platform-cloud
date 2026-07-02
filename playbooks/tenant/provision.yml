@@ -1,14 +1,30 @@
 ---
-- name: Tenant Provisioning
+- name: Tenant Provision
 
   hosts: localhost
-
   gather_facts: false
 
   tasks:
 
-    - name: Provision Stage
-
+    - name: Provision Tenant
       debug:
-
         msg: "Provisioning Tenant..."
+
+    - name: Provision Firewall
+      when: firewall_required == "Yes"
+      debug:
+        msg: "Calling Firewall Service"
+
+    - name: Provision Load Balancer
+      when: lb_required == "Yes"
+      debug:
+        msg: "Calling Load Balancer Service"
+
+    - name: Register Monitoring
+      when: monitoring_required == "Yes"
+      debug:
+        msg: "Register Monitoring"
+
+    - name: Provision Completed
+      debug:
+        msg: "Provision Successful"
