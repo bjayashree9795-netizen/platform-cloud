@@ -2,13 +2,22 @@
 - name: Tenant Infrastructure PreCheck
 
   hosts: localhost
-
   gather_facts: false
 
   tasks:
 
-    - name: PreCheck Stage
+    - name: Verify Region
+      assert:
+        that:
+          - region in ['BLR-DC1', 'BLR-DC2', 'MUM-DC1', 'HYD-DC1']
+        fail_msg: "Unsupported Region"
 
+    - name: Verify Environment
+      assert:
+        that:
+          - environment in ['Development', 'Testing', 'UAT', 'Production']
+        fail_msg: "Invalid Environment"
+
+    - name: Infrastructure PreCheck Passed
       debug:
-
-        msg: "Infrastructure PreCheck Successful"
+        msg: "Infrastructure is ready for provisioning"

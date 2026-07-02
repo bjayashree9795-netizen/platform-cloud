@@ -1,14 +1,38 @@
 ---
-- name: Validate Tenant Request
+- name: Validate Tenant Service Request
 
   hosts: localhost
-
   gather_facts: false
+
+  vars:
+
+    tenant_request:
+
+      tenant_name: "{{ tenant_name }}"
+      tenant_description: "{{ tenant_description }}"
+      business_unit: "{{ business_unit }}"
+      project_name: "{{ project_name }}"
+      environment: "{{ environment }}"
+      region: "{{ region }}"
+      internet_access: "{{ internet_access }}"
+      firewall_required: "{{ firewall_required }}"
+      lb_required: "{{ lb_required }}"
+      monitoring_required: "{{ monitoring_required }}"
+      requested_by: "{{ requested_by }}"
+      owner_email: "{{ owner_email }}"
 
   tasks:
 
-    - name: Validation Stage
-
+    - name: Display Incoming Service Request
       debug:
+        var: tenant_request
 
-        msg: "Tenant Request Validation Successful"
+    - name: Validate Tenant Name
+      assert:
+        that:
+          - tenant_request.tenant_name | length > 2
+        fail_msg: "Tenant Name cannot be empty"
+
+    - name: Validation Successful
+      debug:
+        msg: "Tenant Service Request Validated Successfully"
