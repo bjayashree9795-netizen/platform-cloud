@@ -20,18 +20,6 @@
             ]
         fail_msg: "Unsupported Region"
 
-    - name: Validate Environment
-      vars:
-        valid_envs:
-          - Development
-          - Testing
-          - UAT
-          - Production
-      assert:
-        that:
-          - service_request.tenant.environment in valid_envs
-        fail_msg: "Unsupported Environment"
-
     - name: Service Request Validation Successful
       debug:
         msg: "Tenant Service Request has been validated successfully."

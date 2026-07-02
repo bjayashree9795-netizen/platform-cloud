@@ -1,0 +1,44 @@
+---
+service_request:
+
+  request:
+
+    id: ""
+
+    service: ""
+
+    operation: ""
+
+    requested_by: ""
+
+    request_time: ""
+
+  tenant:
+
+    name: ""
+
+    description: ""
+
+    business_unit: ""
+
+    project_name: ""
+
+    region: ""
+
+    availability_zone: ""
+
+  services:
+
+    internet: false
+
+    firewall: false
+
+    loadbalancer: false
+
+    monitoring: false
+
+  metadata:
+
+    owner_email: ""
+
+    status: "REQUESTED"

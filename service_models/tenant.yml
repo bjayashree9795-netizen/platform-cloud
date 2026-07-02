@@ -11,8 +11,6 @@ tenant:
 
   availability_zone: ""
 
-  environment: ""
-
   department: ""
 
   owner: ""

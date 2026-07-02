@@ -1,0 +1,7 @@
+---
+collections:
+  - name: ansible.netcommon
+  - name: fortinet.fortios
+  - name: community.general
+  - name: ansible.posix
+  - name: amazon.aws

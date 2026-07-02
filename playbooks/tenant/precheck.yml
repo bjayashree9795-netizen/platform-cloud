@@ -5,10 +5,6 @@
 
   tasks:
 
-    - name: Show Environment Value
-      debug:
-        var: tenant_environment
-
     - name: Show Region Value
       debug:
         var: region
@@ -18,12 +14,6 @@
         that:
           - region in allowed_regions
         fail_msg: "Unsupported Region"
-
-    - name: Verify Tenant Environment
-      assert:
-        that:
-          - tenant_environment in allowed_environments
-        fail_msg: "Unsupported Environment"
 
     - name: Infrastructure PreCheck Passed
       debug:
